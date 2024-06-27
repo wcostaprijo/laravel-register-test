@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\Exceptions\CepException;
+use stdClass;
 use Ixudra\Curl\Facades\Curl;
-use Illuminate\Support\Collection;
+use App\Exceptions\CepException;
 
 class CepService
 {
@@ -12,9 +12,9 @@ class CepService
      * Função responsável por buscar o endereço pelo CEP
      *
      * @param string $cep
-     * @return Collection
+     * @return stdClass
      */
-    public function searchAddress(string $cep): Collection
+    public function searchAddress(string $cep): stdClass
     {
         $response = Curl::to("https://viacep.com.br/ws/{$cep}/json/")
             ->asJson()
@@ -22,7 +22,7 @@ class CepService
             ->get();
 
         if($response->status == 200) {
-            return collect($response->content);
+            return json_decode(json_encode($response->content));
         }
 
         throw new CepException(

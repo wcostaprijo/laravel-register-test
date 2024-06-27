@@ -34,7 +34,7 @@ class AuthController extends Controller
      */
     public function register(StoreRequest $request): JsonResponse
     {
-        return response()->json(new UserResource($this->userService->store($request->validated())), 201);
+        return response()->json(new UserResource($this->userService->store($request)), 201);
     }
 
     /**

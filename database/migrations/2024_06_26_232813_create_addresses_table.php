@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->integer('cep');
+            $table->string('cep');
             $table->string('street');
-            $table->string('complement');
+            $table->string('complement')->nullable();
             $table->string('neighborhood');
             $table->integer('number')->default(0);
             $table->string('city');

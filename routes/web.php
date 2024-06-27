@@ -7,7 +7,7 @@ use App\Http\Controllers\RecoveryPasswordController;
 
 Route::get('/register', [AuthController::class, 'showRegisterForm']);
 Route::post('/register', [AuthController::class, 'register']);
-Route::get('/login', [AuthController::class, 'showLoginForm']);
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::prefix('password')->group(function() {
@@ -17,4 +17,4 @@ Route::prefix('password')->group(function() {
     Route::post('/reset', [RecoveryPasswordController::class, 'reset'])->name('password.update');
 });
 
-Route::get('/home', [HomeController::class, 'index'])->middleware('auth');
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');

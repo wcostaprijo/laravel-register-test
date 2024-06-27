@@ -25,9 +25,9 @@ class StoreRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'cep' => 'required|string|min:10|max:10', // XX XXX-XXX
-            'number' => 'integer',
-            'complement' => 'string',
+            'cep' => 'required|min:8|max:8',
+            'number' => 'nullable|integer',
+            'complement' => 'nullable|string',
         ];
     }
     
@@ -35,6 +35,7 @@ class StoreRequest extends FormRequest
     {
         $this->merge([
             'cep' => removeCepMask($this->cep),
+            'number' => empty($this->number) ? 0 : $this->number,
         ]);
     }
 }
