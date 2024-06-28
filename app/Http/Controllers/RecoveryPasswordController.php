@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use App\Http\Requests\User\NewPasswordRequest;
@@ -31,10 +32,8 @@ class RecoveryPasswordController extends Controller
      */
     public function sendResetLinkEmail(RecoveryPasswordRequest $request): JsonResponse
     {
-        $status = Password::sendResetLink($request->only('email'));
-        return $status === Password::RESET_LINK_SENT
-            ? response()->json([], 200)
-            : response()->json(['message' => __($status)], 500);
+        Password::sendResetLink($request->only('email'));
+        return response()->json([], 200);
     }
 
     /**
@@ -67,6 +66,9 @@ class RecoveryPasswordController extends Controller
         );
 
         if ($status === Password::PASSWORD_RESET) {
+            Auth::attempt($request->only('email', 'password'));
+            $request->session()->regenerate();
+            
             return response()->json(['status' => __($status)], 200);
         }
 

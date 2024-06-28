@@ -35,7 +35,7 @@ class StoreRequest extends FormRequest
     {
         $this->merge([
             'cep' => removeCepMask($this->cep),
-            'number' => empty($this->number) ? 0 : $this->number,
+            'number' => empty($this->number) ? 0 : intval($this->number),
         ]);
     }
 }

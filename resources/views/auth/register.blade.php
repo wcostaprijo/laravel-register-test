@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'Login'])
+@extends('layouts.app', ['page' => 'Cadastro'])
 
 @section('content')
 <section class="bg-gray-50 dark:bg-gray-900">

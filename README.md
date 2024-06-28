@@ -11,7 +11,6 @@
 2. Instale as dependências:
     ```sh
     composer install
-    npm install
     ```
 
 3. Configure o arquivo `.env`:

@@ -19,6 +19,7 @@ class Input extends Component
         public bool $required = false,
         public bool $disabled = false,
         public string $customClass = '',
+        public string $value = '',
     ) {}
 
     /**

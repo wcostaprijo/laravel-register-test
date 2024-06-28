@@ -41,7 +41,7 @@ document.querySelector('input[name="cep"]').addEventListener('input', function(e
 
 document.getElementById('registerForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    document.querySelector('#registerForm button').innerText = 'Acessando ...';
+    document.querySelector('#registerForm button').innerText = 'Aguarde ...';
     document.querySelector('#registerForm button').setAttribute("disabled", "disabled");
 
     fetch('/register', {
